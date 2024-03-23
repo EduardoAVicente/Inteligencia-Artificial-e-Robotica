@@ -16,10 +16,29 @@ alimentacao = ctrl.Antecedent(np.arange(0, 11, 1), 'alimentacao')
 obesidade = ctrl.Consequent(np.arange(0, 100, 1), 'obesidade')
 
 # automf -> Atribuição de categorias automaticamente
-altura.automf(names=['baixo','medio','alto'],)
-peso.automf(names=['baixo','medio','alto'])
-sedentarismo.automf(names=['baixo','medio','alto'])
-alimentacao.automf(names=['baixo','medio','alto'])
+# altura.automf(names=['baixo','medio','alto'],)
+# peso.automf(names=['baixo','medio','alto'])
+# sedentarismo.automf(names=['baixo','medio','alto'])
+# alimentacao.automf(names=['baixo','medio','alto'])
+
+# Funções trapezoidais
+altura['baixo'] = fuzz.trapmf(altura.universe, [0, 0, 50, 100])
+peso['alto'] = fuzz.trapmf(peso.universe, [140, 160, 200, 200])
+sedentarismo['alto'] = fuzz.trapmf(sedentarismo.universe, [7, 8, 10, 10])
+alimentacao['baixo'] = fuzz.trapmf(alimentacao.universe, [0, 0, 3, 6])
+
+# Funções gaussianas
+altura['medio'] = fuzz.gaussmf(altura.universe, 150, 40)
+peso['medio'] = fuzz.gaussmf(peso.universe, 120, 30)
+sedentarismo['medio'] = fuzz.gaussmf(sedentarismo.universe, 6, 2)
+alimentacao['medio'] = fuzz.gaussmf(alimentacao.universe, 7, 2)
+
+# Funções triangulares
+altura['alto'] = fuzz.trimf(altura.universe, [200, 250, 300])
+peso['baixo'] = fuzz.trimf(peso.universe, [0, 40, 80])
+sedentarismo['baixo'] = fuzz.trimf(sedentarismo.universe, [0, 0, 5])
+alimentacao['alto'] = fuzz.trimf(alimentacao.universe, [8, 10, 10])
+
 
 
 obesidade.automf(names=['inexistente','baixo','medio','alto','extremo'])
@@ -71,10 +90,12 @@ CalculoObesidade.compute()
 valorObesidade = CalculoObesidade.output['obesidade']
 
 
-print("\naltura %d \nPeso %d \nsedentarismo de %5.2f" %(
+print("\naltura: %d \nPeso: %d \nSedentarismo: %d \nAlimentacao: %d \nGrau de obesidade: %5.2f" %(
        notaAltura,
        notaPeso,
-       valorObesidade,
+       notaSedentarismo,
+       notaAlimentacao,
+       valorObesidade
        ))
 
 
@@ -82,5 +103,4 @@ altura.view(sim=CalculoObesidade)
 peso.view(sim=CalculoObesidade)
 sedentarismo.view(sim=CalculoObesidade)
 alimentacao.view(sim=CalculoObesidade)
-
 plt.show()      
