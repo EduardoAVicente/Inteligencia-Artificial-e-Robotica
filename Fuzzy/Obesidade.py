@@ -35,17 +35,22 @@ obesidade.view()
 
 #Criando as regras
 regra_1 = ctrl.Rule(altura['baixo'] & peso['baixo'] & sedentarismo['alto'] & alimentacao['medio'], obesidade['medio'])
-regra_2 = ctrl.Rule(altura['medio'] & peso['medio'] & sedentarismo['medio'], obesidade['medio'])
-regra_3 = ctrl.Rule(altura['alto'] & peso['alto'] & sedentarismo['baixo'], obesidade['medio'])
-regra_4 = ctrl.Rule(altura['alto'] & peso['alto'] & sedentarismo['alto'], obesidade['extremo'])
-regra_5 = ctrl.Rule(altura['baixo'] & peso['alto'] & sedentarismo['baixo'], obesidade['medio'])
-regra_6 = ctrl.Rule(altura['alto'] & peso['baixo'] & sedentarismo['baixo'], obesidade['inexistente'])
+regra_2 = ctrl.Rule(altura['medio'] & peso['medio'] & sedentarismo['medio'] & alimentacao['medio'], obesidade['medio'])
+regra_3 = ctrl.Rule(altura['alto'] & peso['alto'] & sedentarismo['baixo']& alimentacao['baixo'], obesidade['medio'])
+regra_4 = ctrl.Rule(altura['alto'] & peso['alto'] & sedentarismo['alto'] & alimentacao['baixo'], obesidade['extremo'])
+regra_5 = ctrl.Rule(altura['baixo'] & peso['alto'] & sedentarismo['baixo'] & alimentacao['baixo'], obesidade['medio'])
+regra_6 = ctrl.Rule(altura['alto'] & peso['baixo'] & sedentarismo['baixo'] & alimentacao['alto'], obesidade['inexistente'])
+regra_7 = ctrl.Rule(altura['alto'] & peso['baixo'] & sedentarismo['baixo'] & alimentacao['medio'], obesidade['baixo'])
+regra_8 = ctrl.Rule(altura['alto'] & peso['medio'] & alimentacao['alto'] & sedentarismo['medio'], obesidade['medio'])
+regra_9 = ctrl.Rule(altura['medio'] & peso['medio'] & alimentacao['alto'] & sedentarismo['medio'], obesidade['medio'])
+regra_10 = ctrl.Rule(altura['alto'] & peso['medio'] & alimentacao['alto'] & sedentarismo['baixo'], obesidade['medio'])
+regra_11 = ctrl.Rule(sedentarismo['alto'] & alimentacao['baixo'], obesidade['extremo'])
+regra_12 = ctrl.Rule(altura['alto'] & alimentacao['baixo'], obesidade['medio'])
+regra_13 = ctrl.Rule(peso['baixo'] & sedentarismo['alto'], obesidade['medio'])
 
-regra_7 = ctrl.Rule(altura['alto'] & peso['alto'] & sedentarismo['alto'], obesidade['extremo'])
-regra_8 = ctrl.Rule(altura['alto'] & peso['alto'] & alimentacao['alto'], obesidade['extremo'])
+controlador = ctrl.ControlSystem([regra_1, regra_2, regra_3, regra_4, regra_5, regra_6, regra_7, regra_8, regra_9, regra_10, regra_11, regra_12, regra_13])
 
 
-controlador = ctrl.ControlSystem([regra_1, regra_2, regra_3,regra_4, regra_5, regra_6, regra_7, regra_8])
 
 
 #Simulando
