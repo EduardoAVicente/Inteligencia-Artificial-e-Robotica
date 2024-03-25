@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from skfuzzy import control as ctrl
 
 
+grafico = int(input("Inseira o tipo de grafico que deseja: \n1 - Triangulo\n2 - Trapezio\n3 - Gaussiana\n4 - Automatico \nTipo de grafico: "))
+
 # Variaveis antecedentes
 altura = ctrl.Antecedent(np.arange(0, 300, 1), 'altura')
 peso = ctrl.Antecedent(np.arange(0, 200, 1), 'peso')
@@ -15,45 +17,102 @@ alimentacao = ctrl.Antecedent(np.arange(0, 11, 1), 'alimentacao')
 #Variaveis conseguente
 obesidade = ctrl.Consequent(np.arange(0, 100, 1), 'obesidade')
 
-# automf -> Atribuição de categorias automaticamente
-# altura.automf(names=['baixo','medio','alto'],)
-# peso.automf(names=['baixo','medio','alto'])
-# sedentarismo.automf(names=['baixo','medio','alto'])
-# alimentacao.automf(names=['baixo','medio','alto'])
-
-# Funções Triangulo
-altura['baixo'] = fuzz.trimf(altura.universe, [0, 50, 100])
-altura['medio'] = fuzz.trimf(altura.universe, [50, 100, 150])
-altura['alto'] = fuzz.trimf(altura.universe, [100, 150, 300])
-
-peso['baixo'] = fuzz.trimf(peso.universe, [0, 80, 100])
-peso['medio'] = fuzz.trimf(peso.universe, [80, 100, 140])
-peso['alto'] = fuzz.trimf(peso.universe, [100, 140, 200])
-
-sedentarismo['baixo'] = fuzz.trimf(sedentarismo.universe, [0, 2, 4])
-sedentarismo['medio'] = fuzz.trimf(sedentarismo.universe, [2, 4, 7])
-sedentarismo['alto'] = fuzz.trimf(sedentarismo.universe, [4, 7, 10])
-
-alimentacao['baixo'] = fuzz.trimf(alimentacao.universe, [0, 3, 6])
-alimentacao['medio'] = fuzz.trimf(alimentacao.universe, [3, 6, 8])
-alimentacao['alto'] = fuzz.trimf(alimentacao.universe, [6, 8, 10])
-
-# # Funções gaussianas
-# altura['medio'] = fuzz.gaussmf(altura.universe, 150, 40)
-# peso['medio'] = fuzz.gaussmf(peso.universe, 120, 30)
-# sedentarismo['medio'] = fuzz.gaussmf(sedentarismo.universe, 6, 2)
-# alimentacao['medio'] = fuzz.gaussmf(alimentacao.universe, 7, 2)
-
-# # Funções triangulares
-# altura['alto'] = fuzz.trimf(altura.universe, [200, 250, 300])
-# peso['baixo'] = fuzz.trimf(peso.universe, [0, 40, 80])
-# sedentarismo['baixo'] = fuzz.trimf(sedentarismo.universe, [0, 0, 5])
-# alimentacao['alto'] = fuzz.trimf(alimentacao.universe, [8, 10, 10])
+def automatico():
+       # automf -> Atribuição de categorias automaticamente
+       altura.automf(names=['baixo','medio','alto'],)
+       peso.automf(names=['baixo','medio','alto'])
+       sedentarismo.automf(names=['baixo','medio','alto'])
+       alimentacao.automf(names=['baixo','medio','alto'])
+       
+       obesidade.automf(names=['inexistente', 'baixo', 'medio', 'alto', 'extremo'])
 
 
+def triangulo():
+       # Funções Triangulo
+       altura['baixo'] = fuzz.trimf(altura.universe, [0, 50, 100])
+       altura['medio'] = fuzz.trimf(altura.universe, [50, 100, 150])
+       altura['alto'] = fuzz.trimf(altura.universe, [100, 150, 300])
 
-obesidade.automf(names=['inexistente','baixo','medio','alto','extremo'])
+       peso['baixo'] = fuzz.trimf(peso.universe, [0, 80, 100])
+       peso['medio'] = fuzz.trimf(peso.universe, [80, 100, 140])
+       peso['alto'] = fuzz.trimf(peso.universe, [100, 140, 200])
 
+       sedentarismo['baixo'] = fuzz.trimf(sedentarismo.universe, [0, 2, 4])
+       sedentarismo['medio'] = fuzz.trimf(sedentarismo.universe, [2, 4, 7])
+       sedentarismo['alto'] = fuzz.trimf(sedentarismo.universe, [4, 7, 10])
+
+       alimentacao['baixo'] = fuzz.trimf(alimentacao.universe, [0, 3, 6])
+       alimentacao['medio'] = fuzz.trimf(alimentacao.universe, [3, 6, 8])
+       alimentacao['alto'] = fuzz.trimf(alimentacao.universe, [6, 8, 10])
+       
+       obesidade['inexistente'] = fuzz.trimf(obesidade.universe, [0, 0, 25])
+       obesidade['baixo'] = fuzz.trimf(obesidade.universe, [0, 25, 50])
+       obesidade['medio'] = fuzz.trimf(obesidade.universe, [25, 50, 75])
+       obesidade['alto'] = fuzz.trimf(obesidade.universe, [50, 75, 100])
+       obesidade['extremo'] = fuzz.trimf(obesidade.universe, [75, 100, 100])
+
+def gaugasiana():
+       # Funções gaussianas
+       altura['baixo'] = fuzz.gaussmf(altura.universe, 50, 30)
+       altura['medio'] = fuzz.gaussmf(altura.universe, 150, 40)
+       altura['alto'] = fuzz.gaussmf(altura.universe, 250, 30)
+
+       peso['baixo'] = fuzz.gaussmf(peso.universe, 70, 20) 
+       peso['medio'] = fuzz.gaussmf(peso.universe, 120, 30)
+       peso['alto'] = fuzz.gaussmf(peso.universe, 170, 20)
+
+       sedentarismo['baixo'] = fuzz.gaussmf(sedentarismo.universe, 2, 1)
+       sedentarismo['medio'] = fuzz.gaussmf(sedentarismo.universe, 6, 2)
+       sedentarismo['alto'] = fuzz.gaussmf(sedentarismo.universe, 9, 1)
+
+       alimentacao['baixo'] = fuzz.gaussmf(alimentacao.universe, 3, 1)
+       alimentacao['medio'] = fuzz.gaussmf(alimentacao.universe, 7, 2)
+       alimentacao['alto'] = fuzz.gaussmf(alimentacao.universe, 9, 1)
+       
+       obesidade['inexistente'] = fuzz.gaussmf(obesidade.universe, 10, 5)
+       obesidade['baixo'] = fuzz.gaussmf(obesidade.universe, 30, 10)
+       obesidade['medio'] = fuzz.gaussmf(obesidade.universe, 50, 10)
+       obesidade['alto'] = fuzz.gaussmf(obesidade.universe, 70, 10)
+       obesidade['extremo'] = fuzz.gaussmf(obesidade.universe, 90, 5)
+
+
+
+def trapezoidais():
+       # Funções trapezoidais
+       altura['baixo'] = fuzz.trapmf(altura.universe, [150, 150, 200, 225])
+       altura['medio'] = fuzz.trapmf(altura.universe, [200, 225, 275, 300])
+       altura['alto'] = fuzz.trapmf(altura.universe, [275, 300, 350, 350])
+
+       peso['baixo'] = fuzz.trapmf(peso.universe, [0, 0, 30, 50])
+       peso['medio'] = fuzz.trapmf(peso.universe, [30, 50, 70, 90])
+       peso['alto'] = fuzz.trapmf(peso.universe, [70, 90, 100, 100])
+
+       sedentarismo['baixo'] = fuzz.trapmf(sedentarismo.universe, [0, 0, 2, 3])
+       sedentarismo['medio'] = fuzz.trapmf(sedentarismo.universe, [2, 3, 7, 8])
+       sedentarismo['alto'] = fuzz.trapmf(sedentarismo.universe, [7, 8, 10, 10])
+
+       alimentacao['baixo'] = fuzz.trapmf(alimentacao.universe, [0, 0, 3, 4])
+       alimentacao['medio'] = fuzz.trapmf(alimentacao.universe, [3, 4, 7, 8])
+       alimentacao['alto'] = fuzz.trapmf(alimentacao.universe, [7, 8, 10, 10])
+       
+       obesidade['inexistente'] = fuzz.trapmf(obesidade.universe, [0, 0, 20, 30])
+       obesidade['baixo'] = fuzz.trapmf(obesidade.universe, [20, 30, 40, 50])
+       obesidade['medio'] = fuzz.trapmf(obesidade.universe, [40, 50, 60, 70])
+       obesidade['alto'] = fuzz.trapmf(obesidade.universe, [60, 70, 80, 90])
+       obesidade['extremo'] = fuzz.trapmf(obesidade.universe, [80, 90, 100, 100])
+
+if grafico == 1:
+       triangulo()
+elif grafico == 2:
+       trapezoidais()
+elif grafico == 3:
+       gaugasiana()
+elif grafico == 4:
+       automatico()
+else:
+       print("Opção inválida. Escolha um número de 1 a 4 para o tipo de gráfico.")
+       exit(1)
+            
 #Visualizando as variáveis
 altura.view()
 peso.view()
