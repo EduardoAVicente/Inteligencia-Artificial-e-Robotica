@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 from skfuzzy import control as ctrl
 
 
-grafico = int(input("Inseira o tipo de grafico que deseja: \n1 - Triangulo\n2 - Trapezio\n3 - Gaussiana\n4 - Automatico \nTipo de grafico: "))
+grafico = int(input("Insira o tipo de grafico que deseja: \n1 - Triangulo\n2 - Trapezio\n3 - Gaussiana\n4 - Automatico \nTipo de grafico: "))
 
 # Variaveis antecedentes
 altura = ctrl.Antecedent(np.arange(0, 300, 1), 'altura')
@@ -79,26 +79,26 @@ def gaugasiana():
 
 def trapezoidais():
        # Funções trapezoidais
-       altura['baixo'] = fuzz.trapmf(altura.universe, [150, 150, 200, 225])
-       altura['medio'] = fuzz.trapmf(altura.universe, [200, 225, 275, 300])
-       altura['alto'] = fuzz.trapmf(altura.universe, [275, 300, 350, 350])
+       altura['baixo'] = fuzz.trapmf(altura.universe, [0, 0, 50, 100])
+       altura['medio'] = fuzz.trapmf(altura.universe, [50, 100, 150, 200])
+       altura['alto'] = fuzz.trapmf(altura.universe, [150, 200, 250, 300])
 
-       peso['baixo'] = fuzz.trapmf(peso.universe, [0, 0, 30, 50])
-       peso['medio'] = fuzz.trapmf(peso.universe, [30, 50, 70, 90])
-       peso['alto'] = fuzz.trapmf(peso.universe, [70, 90, 100, 100])
+       peso['baixo'] = fuzz.trapmf(peso.universe, [0, 0, 50, 100])
+       peso['medio'] = fuzz.trapmf(peso.universe, [50, 100, 150, 200])
+       peso['alto'] = fuzz.trapmf(peso.universe, [150, 200, 250, 300])
 
-       sedentarismo['baixo'] = fuzz.trapmf(sedentarismo.universe, [0, 0, 2, 3])
-       sedentarismo['medio'] = fuzz.trapmf(sedentarismo.universe, [2, 3, 7, 8])
-       sedentarismo['alto'] = fuzz.trapmf(sedentarismo.universe, [7, 8, 10, 10])
+       sedentarismo['baixo'] = fuzz.trapmf(sedentarismo.universe, [0, 0, 3, 5])
+       sedentarismo['medio'] = fuzz.trapmf(sedentarismo.universe, [3, 5, 6, 8])
+       sedentarismo['alto'] = fuzz.trapmf(sedentarismo.universe, [6, 8, 10, 10])
 
-       alimentacao['baixo'] = fuzz.trapmf(alimentacao.universe, [0, 0, 3, 4])
-       alimentacao['medio'] = fuzz.trapmf(alimentacao.universe, [3, 4, 7, 8])
-       alimentacao['alto'] = fuzz.trapmf(alimentacao.universe, [7, 8, 10, 10])
+       alimentacao['baixo'] = fuzz.trapmf(alimentacao.universe, [0, 0, 3, 5])
+       alimentacao['medio'] = fuzz.trapmf(alimentacao.universe, [3, 5, 6, 8])
+       alimentacao['alto'] = fuzz.trapmf(alimentacao.universe, [6, 8, 10, 10])
        
-       obesidade['inexistente'] = fuzz.trapmf(obesidade.universe, [0, 0, 20, 30])
-       obesidade['baixo'] = fuzz.trapmf(obesidade.universe, [20, 30, 40, 50])
-       obesidade['medio'] = fuzz.trapmf(obesidade.universe, [40, 50, 60, 70])
-       obesidade['alto'] = fuzz.trapmf(obesidade.universe, [60, 70, 80, 90])
+       obesidade['inexistente'] = fuzz.trapmf(obesidade.universe, [0, 0, 10, 20])
+       obesidade['baixo'] = fuzz.trapmf(obesidade.universe, [10, 20, 30, 50])
+       obesidade['medio'] = fuzz.trapmf(obesidade.universe, [30, 50, 50, 70])
+       obesidade['alto'] = fuzz.trapmf(obesidade.universe, [50, 70, 80, 90])
        obesidade['extremo'] = fuzz.trapmf(obesidade.universe, [80, 90, 100, 100])
 
 if grafico == 1:
@@ -145,16 +145,16 @@ controlador = ctrl.ControlSystem([regra_1, regra_2, regra_3, regra_4, regra_5, r
 #Simulando
 CalculoObesidade = ctrl.ControlSystemSimulation(controlador)
 
-# notaAltura = int(input('Altura(Cm): '))
-# notaPeso = int(input('peso(Kg): '))
-# notaSedentarismo = int(input('De 0 a 10 qual seu nivel de sedentarismo: '))
-# notaAlimentacao = int(input('De 0 a 10 qual a qualidade de suas refeicoes: '))
+notaAltura = int(input('Altura(Cm): '))
+notaPeso = int(input('peso(Kg): '))
+notaSedentarismo = int(input('De 0 a 10 qual seu nivel de sedentarismo: '))
+notaAlimentacao = int(input('De 0 a 10 qual a qualidade de suas refeicoes: '))
 
 
-notaAltura = 170
-notaPeso = 85
-notaSedentarismo = 6
-notaAlimentacao = 8
+# notaAltura = 170
+# notaPeso = 85
+# notaSedentarismo = 6
+# notaAlimentacao = 8
 
 
 CalculoObesidade.input['altura'] = notaAltura
@@ -180,4 +180,5 @@ altura.view(sim=CalculoObesidade)
 peso.view(sim=CalculoObesidade)
 sedentarismo.view(sim=CalculoObesidade)
 alimentacao.view(sim=CalculoObesidade)
+obesidade.view(sim=CalculoObesidade)
 plt.show()      
