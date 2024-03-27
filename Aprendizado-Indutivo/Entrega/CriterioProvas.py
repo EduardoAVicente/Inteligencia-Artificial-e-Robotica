@@ -20,7 +20,7 @@ p1 = np.asarray(data['P1']).reshape(-1,1)
 p2 = np.asarray(data['P2']).reshape(-1,1)
 faltas = np.asarray(data['PercFalta']).reshape(-1,1)
 
-features = np.concatenate((p2 , p1),axis=1)
+features = np.concatenate((p2 , p1,faltas),axis=1)
 target = data['resultado']
 
 
