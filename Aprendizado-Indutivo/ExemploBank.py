@@ -7,12 +7,12 @@ from scipy.io import arff
 
 data = arff.loadarff('Base-de-dados/bank.arff')
 df = pd.DataFrame(data[0])
-df['poutcome'] = df['poutcome'].apply(lambda x: x.decode('utf-8'))
+df['subscribed'] = df['subscribed'].apply(lambda x: x.decode('utf-8'))
 
-features = df.drop('poutcome', axis=1)
-target = df['poutcome']
+features = df.drop('subscribed', axis=1)
+target = df['subscribed']
 
-categorical_columns = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'subscribed']
+categorical_columns = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month', 'poutcome']
 for column in categorical_columns:
     features[column] = pd.Categorical(features[column])
     features[column] = features[column].cat.codes
@@ -28,5 +28,5 @@ tree.plot_tree(Arvore, feature_names=list(features.columns), class_names=['unkno
 plt.show()
 
 fig, ax = plt.subplots(figsize=(25, 10))
-metrics.ConfusionMatrixDisplay.from_estimator(Arvore, X_test, y_test, display_labels=['unknown','other','failure','success'], values_format='d', ax=ax)
+metrics.ConfusionMatrixDisplay.from_estimator(Arvore, X_test, y_test, display_labels=['yes','no'], values_format='d', ax=ax)
 plt.show()

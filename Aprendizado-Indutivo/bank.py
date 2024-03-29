@@ -12,7 +12,7 @@ df = pd.DataFrame(data)
 
 encoder = OneHotEncoder()
 
-categorical_features = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month']
+categorical_features = ['job', 'marital', 'education', 'default', 'housing', 'loan', 'contact', 'month','poutcome']
 categorical_data = df[categorical_features]
 
 encoded_data = encoder.fit_transform(categorical_data)
@@ -22,7 +22,7 @@ numeric_data = df[numeric_features]
 
 features = np.concatenate((encoded_data.toarray(), numeric_data), axis=1)
 
-target = df['poutcome'].astype(str)
+target = df['subscribed'].astype(str)
 
 Arvore = DecisionTreeClassifier(criterion='entropy').fit(features, target)
 
