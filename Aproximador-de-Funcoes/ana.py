@@ -11,11 +11,7 @@ loss_values = []  # Lista para armazenar os valores da curva de perda
 
 #teste2.npy
 
-# 10 10 1000
 
-# 10 1000
-
-# 10 10 300000
 
 for i in range(10):
     regr = MLPRegressor(hidden_layer_sizes=(10,10),  # primeiro neuronioc depois camada
