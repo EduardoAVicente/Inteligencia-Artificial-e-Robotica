@@ -9,3 +9,5 @@
 [3. Logica Fuzzy](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Fuzzy)
 
 [4. Aprendizado Indutivo](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Aprendizado-Indutivo)
+
+[5. Aproximador de Funções](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Aproximador-de-Funcoes)
