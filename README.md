@@ -11,3 +11,5 @@
 [4. Aprendizado Indutivo](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Aprendizado-Indutivo)
 
 [5. Aproximador de Funções](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Aproximador-de-Funcoes)
+
+[6. Classificador RNA](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Classificador-RNA)
