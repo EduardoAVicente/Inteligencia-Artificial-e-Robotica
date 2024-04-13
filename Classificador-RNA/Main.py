@@ -22,6 +22,7 @@ predicao = Classificador.predict(features)
 plt.subplot(2,2,3)
 plt.scatter(features[:,0], features[:,1], c=predicao,marker='d',cmap='viridis',s=150)
 plt.scatter(features[:,0], features[:,1], c=target,marker='o',cmap='viridis',s=15)
+plt.show()
 
 
 
