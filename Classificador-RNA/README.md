@@ -1,12 +1,5 @@
 ﻿
 # <a name="_w8nz3612tw5v"></a>RNA Classificador de Padrões
-Grupo:
-
-Eduardo Antunes Vicente RA: 22.121.010-7
-
-Ana Jéssica Soares da Silva RA: 22.121.100-6
-
-Link do GitHub com o codigo: <https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Classificador-RNA>
 
 Introdução
 
