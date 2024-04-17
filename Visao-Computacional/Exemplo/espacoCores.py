@@ -5,7 +5,7 @@ import cv2
 import matplotlib.pyplot as plt
 
 # Carregans imagem
-img = cv2.imread('imagens/FEI01.jpg')
+img = cv2.imread('./imagens/FEI01.jpg')
 
 
 # Convertendo espaço de cores
