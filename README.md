@@ -13,3 +13,5 @@
 [5. Aproximador de Funções](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Aproximador-de-Funcoes)
 
 [6. Classificador RNA](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Classificador-RNA)
+
+[7. Visão Computacional](https://github.com/EduardoAVicente/Inteligencia-Artificial-e-Robotica/tree/main/Visao-Computacional)
