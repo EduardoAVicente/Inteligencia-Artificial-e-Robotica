@@ -15,11 +15,11 @@ img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 #Convertendo para preto e branco (RGB -> Gray Scale -> BW)
 img_gray = cv2.cvtColor(img, cv2.COLOR_RGB2GRAY)
 a = img_gray.max()
-_, thresh = cv2.threshold(img_gray, a/1.2 ,a,cv2.THRESH_BINARY_INV)
+_, thresh = cv2.threshold(img_gray, a/15 ,a,cv2.THRESH_BINARY_INV)
 
 
 
-tamanhoKernel = 18
+tamanhoKernel = 20
 kernel = np.ones((tamanhoKernel,tamanhoKernel), np.uint8)
 thresh_open = cv2.morphologyEx(thresh, cv2.MORPH_OPEN, kernel)
 
@@ -28,16 +28,16 @@ img_blur = cv2.blur(img_gray, ksize=(tamanhoKernel,tamanhoKernel))
 
 # Detecção borda com Canny (sem blurry)
 # edges_gray = cv2.Canny(image=img_gray, threshold1=500, threshold2=400)
-edges_gray = cv2.Canny(image=img_gray, threshold1=a/50, threshold2=a/20)
+edges_gray = cv2.Canny(image=img_gray, threshold1=150, threshold2=200)
 
 # Detecção borda com Canny (com blurry)
-edges_blur = cv2.Canny(image=img_blur, threshold1=15, threshold2=25)
+edges_blur = cv2.Canny(image=img_blur, threshold1=15, threshold2=35)
 
 
 
 # contorno
 contours, hierarchy = cv2.findContours(
-                                   image = edges_gray,
+                                   image = edges_blur,
                                    mode = cv2.RETR_TREE,
                                    method = cv2.CHAIN_APPROX_SIMPLE)
 contours = sorted(contours, key = cv2.contourArea, reverse = True)
