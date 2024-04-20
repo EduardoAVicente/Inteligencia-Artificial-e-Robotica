@@ -28,10 +28,10 @@ img_blur = cv2.blur(img_gray, ksize=(tamanhoKernel,tamanhoKernel))
 
 # Detecção borda com Canny (sem blurry)
 # edges_gray = cv2.Canny(image=img_gray, threshold1=500, threshold2=400)
-edges_gray = cv2.Canny(image=img_gray, threshold1=150, threshold2=200)
+edges_gray = cv2.Canny(image=img_gray, threshold1=0, threshold2=200)
 
 # Detecção borda com Canny (com blurry)
-edges_blur = cv2.Canny(image=img_blur, threshold1=250, threshold2=300)
+edges_blur = cv2.Canny(image=img_blur, threshold1=150, threshold2=600)
 
 
 
@@ -47,8 +47,20 @@ final = cv2.drawContours(img_copy, contours, contourIdx = -1,
 
 
 #plot imagens
-# imagens = [img,img_blur,img_gray,edges_gray,edges_blur,thresh,thresh_open,final]
-imagens = [edges_blur,final]
+imagens = [img,img_blur,img_gray,edges_gray,edges_blur,thresh,thresh_open,final]
+
+formatoX = math.ceil(len(imagens)**.5)
+if (formatoX**2-len(imagens))>formatoX:
+    formatoY = formatoX-1
+else:
+    formatoY = formatoX
+for i in range(len(imagens)):
+    plt.subplot(formatoY, formatoX, i + 1)
+    plt.imshow(imagens[i],'gray')
+    plt.xticks([]),plt.yticks([])
+plt.show()
+
+imagens = [final]
 
 formatoX = math.ceil(len(imagens)**.5)
 if (formatoX**2-len(imagens))>formatoX:

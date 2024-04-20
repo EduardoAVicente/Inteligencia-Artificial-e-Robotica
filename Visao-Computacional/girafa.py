@@ -45,6 +45,20 @@ final = cv2.drawContours(img_copy, contours, contourIdx = -1,
 
 #plot imagens
 imagens = [img,img_blur,img_gray,edges_gray,edges_blur,thresh,thresh_open,final]
+
+formatoX = math.ceil(len(imagens)**.5)
+if (formatoX**2-len(imagens))>formatoX:
+    formatoY = formatoX-1
+else:
+    formatoY = formatoX
+for i in range(len(imagens)):
+    plt.subplot(formatoY, formatoX, i + 1)
+    plt.imshow(imagens[i],'gray')
+    plt.xticks([]),plt.yticks([])
+plt.show()
+
+imagens = [final]
+
 formatoX = math.ceil(len(imagens)**.5)
 if (formatoX**2-len(imagens))>formatoX:
     formatoY = formatoX-1
